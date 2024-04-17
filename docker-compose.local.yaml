@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: docker/local/app
+      dockerfile: Dockerfile
+    image: local-testing/php-fpm
+    volumes:
+      - '.:/var/www/html'
+    environment:
+      - SUPERVISOR_PHP_USER=sail
+    networks:
+      - sail
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - '80:80'
+    volumes:
+      - './docker/local/nginx/site.conf:/etc/nginx/conf.d/default.conf'
+      - '.:/var/www/html'
+    depends_on:
+      - app
+    networks:
+      - sail
+
+networks:
+  sail:
+    driver: bridge
