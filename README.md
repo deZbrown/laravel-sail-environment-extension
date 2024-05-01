@@ -70,7 +70,7 @@ To start your services for development, navigate to your project directory and r
 Before running the following command, ensure Composer is installed to fetch necessary dependencies, including Sail:
 
 ```bash
-./vendor/bin/sail -f docker-compose.yaml -f docker-compose.local.yaml up --build -d
+docker-compose -f docker-compose.yaml -f docker-compose.local.yaml up --build -d
 ```
 
 ### Visit your application at `http://localhost` or another configured port.
