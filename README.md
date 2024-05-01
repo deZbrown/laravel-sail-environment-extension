@@ -77,7 +77,71 @@ Before running the following command, ensure Composer is installed to fetch nece
 
 ## Customization
 
-Modify Docker files and configurations to meet specific requirements or accommodate additional services as needed.
+If you want to incorporate the submodule's files directly into your main project and sever the link to the submodule's original Git repository, you can effectively "absorb" the submodule into the main repository. This process involves removing the submodule system and then adding the files directly into your main repository as if they were part of the original project.
+
+Here's how you can do it step-by-step:
+
+### 1\. Remove the Submodule Entry
+
+First, you need to remove the submodule entry from the `.gitmodules` file and the main project's Git configuration:
+
+-   Delete the submodule entry from `.gitmodules`:
+
+    Open the `.gitmodules` file and remove the section related to the `docker` submodule.
+
+-   Remove the submodule entry from Git's configuration:
+
+    bash
+
+    `git config -f .git/config --remove-section submodule.docker`
+
+### 2\. Unstage the Submodule and Sync
+
+After modifying the configuration, unstage the submodule and synchronize the changes:
+
+bash
+
+`git rm --cached docker
+git commit -m "Remove submodule entry for docker"`
+
+### 3\. Delete Submodule Files and Folders
+
+Remove the submodule's metadata from the repository:
+
+bash
+
+`rm -rf .git/modules/docker`
+
+### 4\. Convert Submodule to Regular Files
+
+You can now convert the submodule to a regular directory within your main repository:
+
+-   If you still need the contents from the submodule, make sure they are copied out before deleting the submodule folder:
+
+    bash
+
+    `cp -r docker docker_backup
+    rm -rf docker
+    mv docker_backup docker`
+
+-   Add the previously submodule directory to your repository as normal files:
+
+    bash
+
+    `git add docker
+    git commit -m "Add former submodule files as regular project files"`
+
+### 5\. Push Changes
+
+Finally, push your changes to the remote repository to ensure all changes are synced:
+
+bash
+
+`git push origin master`
+
+By following these steps, you transform the contents of the `docker` submodule into a regular part of your main Git repository. This eliminates the submodule relationship and treats the former submodule's files like any other part of your project, with no links back to the original submodule repository.
+
+This approach simplifies your repository's structure and might be easier to manage if you do not need to keep the submodule as a separate entity.
 
 ## Contributing
 
