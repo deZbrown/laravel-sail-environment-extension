@@ -91,26 +91,28 @@ First, you need to remove the submodule entry from the `.gitmodules` file and th
 
 -   Remove the submodule entry from Git's configuration:
 
-    bash
+```bash
+git config -f .git/config --remove-section submodule.docker
+```
 
-    `git config -f .git/config --remove-section submodule.docker`
 
 ### 2\. Unstage the Submodule and Sync
 
 After modifying the configuration, unstage the submodule and synchronize the changes:
 
-bash
+```bash
+git rm --cached docker
+git commit -m "Remove submodule entry for docker"
+```
 
-`git rm --cached docker
-git commit -m "Remove submodule entry for docker"`
 
 ### 3\. Delete Submodule Files and Folders
 
 Remove the submodule's metadata from the repository:
 
-bash
-
-`rm -rf .git/modules/docker`
+```bash
+rm -rf .git/modules/docker
+```
 
 ### 4\. Convert Submodule to Regular Files
 
@@ -118,26 +120,26 @@ You can now convert the submodule to a regular directory within your main reposi
 
 -   If you still need the contents from the submodule, make sure they are copied out before deleting the submodule folder:
 
-    bash
-
-    `cp -r docker docker_backup
-    rm -rf docker
-    mv docker_backup docker`
+```bash
+cp -r docker docker_backup
+rm -rf docker
+mv docker_backup docker
+```
 
 -   Add the previously submodule directory to your repository as normal files:
 
-    bash
-
-    `git add docker
-    git commit -m "Add former submodule files as regular project files"`
+```bash
+git add docker
+git commit -m "Add former submodule files as regular project files"
+```
 
 ### 5\. Push Changes
 
 Finally, push your changes to the remote repository to ensure all changes are synced:
 
-bash
-
-`git push origin master`
+```bash
+git push origin master
+```
 
 By following these steps, you transform the contents of the `docker` submodule into a regular part of your main Git repository. This eliminates the submodule relationship and treats the former submodule's files like any other part of your project, with no links back to the original submodule repository.
 
