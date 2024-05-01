@@ -52,12 +52,17 @@ git submodule add https://github.com/deZbrown/laravel-sail-environment-extension
 git submodule update --init --recursive
 ```
 
+### Copy YAML files
+
+To start the docker-compose setup, copy docker-compose yaml files to the root of your project
+Update any volume or service information, particular to that project
+
 ### For Development
 
 To start your services for development, navigate to your project directory and run:
 
 ```bash
-./vendor/bin/sail docker-compose -f docker-compose.yaml -f docker-compose.override.yaml up --build -d
+./vendor/bin/sail -f docker-compose.yaml -f docker-compose.override.yaml up --build -d
 ```
 
 ### For Local Testing
