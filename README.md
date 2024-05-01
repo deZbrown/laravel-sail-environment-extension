@@ -141,6 +141,8 @@ Finally, push your changes to the remote repository to ensure all changes are sy
 git push origin master
 ```
 
+Or run the "clear-submodule.sh" shell script.
+
 By following these steps, you transform the contents of the `docker` submodule into a regular part of your main Git repository. This eliminates the submodule relationship and treats the former submodule's files like any other part of your project, with no links back to the original submodule repository.
 
 This approach simplifies your repository's structure and might be easier to manage if you do not need to keep the submodule as a separate entity.
