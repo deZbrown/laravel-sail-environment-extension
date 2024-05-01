@@ -43,6 +43,15 @@ This setup assumes:
 
 ## Usage
 
+### Add Docker Setup as a Submodule
+
+To integrate this Docker setup as a submodule in any Laravel project, follow these steps:
+
+```bash
+git submodule add https://github.com/deZbrown/laravel-sail-environment-extension.git docker
+git submodule update --init --recursive
+```
+
 ### For Development
 
 To start your services for development, navigate to your project directory and run:
@@ -57,15 +66,6 @@ Before running the following command, ensure Composer is installed to fetch nece
 
 ```bash
 ./vendor/bin/sail -f docker-compose.yaml -f docker-compose.local.yaml up --build -d
-```
-
-### Add Docker Setup as a Submodule
-
-To integrate this Docker setup as a submodule in any Laravel project, follow these steps:
-
-```bash
-git submodule add https://github.com/yourusername/laravel-docker-environment.git docker
-git submodule update --init --recursive
 ```
 
 ### Visit your application at `http://localhost` or another configured port.
